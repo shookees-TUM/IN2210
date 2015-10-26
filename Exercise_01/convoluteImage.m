@@ -4,7 +4,7 @@ function J = convoluteImage(H, I, border)
     image_size = size(I);
     %if it has 3 dimensions, give color
     if size(image_size, 2) == 3
-        %J = I;
+        J = I;
         for i = 1: size(I, 3)
             J(:, :, i) = convolution(H, I(:, :, i), border);
         end
