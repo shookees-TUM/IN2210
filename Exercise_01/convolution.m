@@ -55,7 +55,7 @@ function J = convolution(H, I, border)
     for i = 1: image_size(1)
         for j = 1: image_size(2)
             % Assign result the elementwise multiplication's sum
-            applied_mask = H.*padded_image(1 + i - pad(1): 1 + i + pad(1), 1 + j - pad(2): 1 + j + pad(2));
+            applied_mask = H.*padded_image(i: i + 2 * pad(1), j: j + 2 * pad(2));
             % sum adds up columns, : makes it sum to 
             J(i, j) = sum(applied_mask(:));
         end
