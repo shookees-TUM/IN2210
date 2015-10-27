@@ -15,32 +15,32 @@ function J = convolution(H, I, border)
     padded_image(1 + pad(1): end - pad(1), 1 + pad(2): end - pad(2)) = I;
     % Handle border problem
     if border == 'mirror'
-         %left border
-         padded_image(1 + pad(1): end - pad(1), 1 : pad(2)) = fliplr(padded_image(1 + pad(1): end - pad(1), 1 + pad(2): 2 * pad(2)));
-         %top left diagonal space
-         padded_image(1: pad(1), 1: pad(2)) = fliplr(flipud(padded_image(1 + pad(1): 2 * pad(1), 1 + pad(2): 2 * pad(2))));
-         %top border
-         padded_image(1: pad(1), 1 + pad(2): end - pad(2)) = flipud(padded_image(1 + pad(1): 2 * pad(1), 1 + pad(2): end - pad(2)));
-         %top right diagonal space
-         padded_image(1: pad(1), end - pad(2) + 1: end) = fliplr(flipud(padded_image(1 + pad(1): 2 * pad(1), end - 2 * pad(2) + 1: end - pad(2))));
-         %right border
-         padded_image(1 + pad(1): end - pad(1), end - pad(2) + 1: end) = fliplr(padded_image(1 + pad(1): end - pad(1), end - 2 * pad(2) + 1: end - pad(2)));
-         %bottom right diagonal space
-         padded_image(end - pad(1) + 1: end , end - pad(2) + 1: end) = fliplr(flipud(padded_image(end - 2 * pad(1) + 1: end - pad(1), end - 2 * pad(2) + 1: end - pad(2))));
-         %bottom border
-         padded_image(end - pad(1) + 1: end, 1 + pad(2): end - pad(2)) = flipud(padded_image(end - 2 * pad(1) + 1: end - pad(1), 1 + pad(2): end - pad(2)));
-         %bottom left diagonal space
-         padded_image(end - pad(1) + 1: end, 1: pad(2)) = fliplr(flipud(padded_image(end - 2 * pad(1) + 1: end - pad(1), pad(2) + 1: 2 * pad(2))));
-     elseif border == 'multiply'
-         %left border
-         %top left diagonal space
-         %top border
-         %top right diagonal space
-         %right border
-         %bottom right diagonal space
-         %bottom border
-         %bottom left diagonal space
-     end %if none is chosen, simply leave as it is
+        %left border
+        padded_image(1 + pad(1): end - pad(1), 1 : pad(2)) = fliplr(padded_image(1 + pad(1): end - pad(1), 1 + pad(2): 2 * pad(2)));
+        %top left diagonal space
+        padded_image(1: pad(1), 1: pad(2)) = fliplr(flipud(padded_image(1 + pad(1): 2 * pad(1), 1 + pad(2): 2 * pad(2))));
+        %top border
+        padded_image(1: pad(1), 1 + pad(2): end - pad(2)) = flipud(padded_image(1 + pad(1): 2 * pad(1), 1 + pad(2): end - pad(2)));
+        %top right diagonal space
+        padded_image(1: pad(1), end - pad(2) + 1: end) = fliplr(flipud(padded_image(1 + pad(1): 2 * pad(1), end - 2 * pad(2) + 1: end - pad(2))));
+        %right border
+        padded_image(1 + pad(1): end - pad(1), end - pad(2) + 1: end) = fliplr(padded_image(1 + pad(1): end - pad(1), end - 2 * pad(2) + 1: end - pad(2)));
+        %bottom right diagonal space
+        padded_image(end - pad(1) + 1: end , end - pad(2) + 1: end) = fliplr(flipud(padded_image(end - 2 * pad(1) + 1: end - pad(1), end - 2 * pad(2) + 1: end - pad(2))));
+        %bottom border
+        padded_image(end - pad(1) + 1: end, 1 + pad(2): end - pad(2)) = flipud(padded_image(end - 2 * pad(1) + 1: end - pad(1), 1 + pad(2): end - pad(2)));
+        %bottom left diagonal space
+        padded_image(end - pad(1) + 1: end, 1: pad(2)) = fliplr(flipud(padded_image(end - 2 * pad(1) + 1: end - pad(1), pad(2) + 1: 2 * pad(2))));
+    elseif border == 'multiply'
+        %left border
+        %top left diagonal space
+        %top border
+        %top right diagonal space
+        %right border
+        %bottom right diagonal space
+        %bottom border
+        %bottom left diagonal space
+    end %if none is chosen, simply leave as it is
     % Initiate resulting image, leaving pads (comfy for indexing)
     J = zeros(size(image_size));
     for i = 1 + pad(1): image_size(1) - pad(1)
@@ -52,5 +52,5 @@ function J = convolution(H, I, border)
         end
     end
     % Remove padding
-    J = J(pad(1): end - pad(1), pad(2): end - pad(2));
+    J = J(1 + pad(1): end - pad(1), 1 + pad(2): end - pad(2));
 end
