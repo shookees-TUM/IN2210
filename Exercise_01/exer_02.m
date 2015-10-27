@@ -14,9 +14,7 @@ if dimGauss == 2
         for v = -s:1:s
             g = 1 / (2 * pi * sigma^2) * exp(-1/2 * (u^2 + v^2) / (sigma^2));
             G2D(u+s+1, v+s+1) = g;
-            v = v + 1;
         end
-        u = u + 1;
     end
     mesh(G2D);
     %pause;
@@ -24,7 +22,6 @@ elseif dimGauss == 1
     for u = -s:1:s
         g = 1 / sqrt(2 * pi * sigma^2) * exp(-1/2 * (u^2) / (sigma^2));
         G1D(u+s+1) = g;
-        u = u + 1;
     end
     G1Dtrans = transpose(G1D);
     plot(G1D);
@@ -35,11 +32,12 @@ end
 % where H is the mask, I is the image, border is the boarder handling
 tic;
 if dimGauss == 2
-    J = convoluteImage(G, I, 'mirror');
+    J = convoluteImage(G2D, I, 'mirror');
 elseif dimGauss == 1
     J1 = convoluteImage(G1D, I, 'mirror');
     J = convoluteImage(G1Dtrans, J1, 'mirror');
 else
 end
 elapsed_time = toc
+colormap(gray(256)); 
 imagesc(J);
