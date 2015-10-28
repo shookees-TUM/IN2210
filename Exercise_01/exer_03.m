@@ -16,7 +16,7 @@ Gradx = convoluteImage(Dx, I, 'mirror');
 % x gradient image
 subplot(2, 3, 2);
 image(Gradx);
-title('x gradient');
+title('x Gradient');
 daspect([1 1 1]); % Keeps aspect ratio 1:1
 %pause; 
 % compute y gradient image
@@ -24,16 +24,24 @@ Grady = convoluteImage(Dy, I, 'mirror');
 % x gradient image
 subplot(2, 3, 3);
 image(Grady);
-title('y gradient');
+title('y Gradient');
 daspect([1 1 1]); % Keeps aspect ratio 1:1
 %pause; 
 %
 % part b)
 % gradient magnitude
-grad_I = sqrt((Gradx)^2 + (Grady)^2);
+grad_I = sqrt( Gradx .* Gradx + Grady .* Grady );
 % gradient orientation
-Psi_grad_I = atan2(Gradx / Grady);
+Psi_grad_I = atan2( Gradx, Grady );
 % display gradient magnitude
-imagesc(grad_I);
+subplot(2, 3, 4);
+image(grad_I);
+%imagesc(grad_I);
+title('Gradient Magnitude');
+daspect([1 1 1]); % Keeps aspect ratio 1:1
 % diplay gradient orientation
-imagesc(Psi_grad_I);
+subplot(2, 3, 5);
+image(grad_I);
+%imagesc(Psi_grad_I);
+title('Gradient Orientation');
+daspect([1 1 1]); % Keeps aspect ratio 1:1
