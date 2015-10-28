@@ -4,22 +4,92 @@ H = ones(3);
 H = H./9;
 I = imread('lena.gif');
 J = convoluteImage(H, I, 'multiply');
-figure
+figure('Name', 'Exercise 1');
 colormap(gray(256)); 
 % Original image
 subplot(1, 2, 1);
 image(I);
-daspect ([1 1]); % Keeps aspect ratio 1:1
+title("Original");
+daspect([1 1]); % Keeps aspect ratio 1:1
 % Convoluted image
 subplot(1, 2, 2);
 image(J);
-daspect ([1 1]); % Keeps aspect ratio 1:1
-pause; 
+title("Convoluted");
+daspect([1 1]); % Keeps aspect ratio 1:1
+%pause; 
 % End of Exercise 1
 
 % Exercise 2
-sigma = 3;
-dimGauss = 2;
+% Get 2D Gaussian filter for sigma = 1
+sigma = 1;
 mask_size = 3 * sigma;
-G2D = gaussian2D(mask_size, sigma);
+G2D_sigma1 = gaussian2D(mask_size, sigma);
+tic;
+I_G2D_sigma1 = convoluteImage(G2D_sigma1, I, 'multiply');
+I_G2D_sigma1_time = toc;
 
+% Get 2D Gaussian filter for sigma = 3
+sigma = 3;
+mask_size = 3 * sigma;
+G2D_sigma3 = gaussian2D(mask_size, sigma);
+tic;
+I_G2D_sigma3 = convoluteImage(G2D_sigma3, I, 'multiply');
+I_G2D_sigma3_time = toc;
+
+% Get 1D Gaussian filter for sigma = 1
+sigma = 1;
+mask_size = 3 * sigma;
+G1D_sigma1 = gaussian1D(mask_size, sigma);
+tic;
+I_G1D_sigma1 = convoluteImage(G1D_sigma1,  I, 'multiply');
+I_G1D_sigma1 = convoluteImage(G1D_sigma1', I_G1D_sigma1, 'multiply');
+I_G1D_sigma1_time = toc;
+
+% Get 1D Gaussian filter for sigma = 3
+sigma = 3;
+mask_size = 3 * sigma;
+G1D_sigma3 = gaussian1D(mask_size, sigma);
+tic;
+I_G1D_sigma3 = convoluteImage(G1D_sigma3,  I, 'multiply');
+I_G1D_sigma3 = convoluteImage(G1D_sigma3', I_G1D_sigma3, 'multiply');
+I_G1D_sigma3_time = toc;
+
+figure('Name', 'Exercise 2.a');
+subplot(2, 2, 1);
+image(I_G2D_sigma1);
+title('Sigma = 1 Gaussian 2D');
+daspect([1 1]);
+subplot(2, 2, 2);
+image(I_G2D_sigma3);
+title('Sigma = 3 Gaussian 2D');
+daspect([1 1]);
+subplot(2, 2, 3);
+image(I_G1D_sigma1);
+title('Sigma = 1 Gaussian 1D');
+daspect([1 1]);
+subplot(2, 2, 4);
+image(I_G1D_sigma3);
+title('Sigma = 3 Gaussian 1D');
+daspect([1 1]);
+%pause;
+
+% Squared differences
+diff_sigma1 = I_G2D_sigma1 - I_G1D_sigma1
+%diff_sigma1 = diff_sigma1.^2;
+diff_sigma3 = I_G2D_sigma3 - I_G1D_sigma3
+%diff_sigma3 = diff_sigma3.^2;
+figure('Name', 'Exercise 2.b');
+subplot(1, 2, 1);
+image(diff_sigma1);
+title('Sigma = 1 difference');
+daspect([1 1]);
+subplot(1, 2, 2);
+image(diff_sigma3);
+title('Sigma = 3 difference');
+daspect([1 1]);
+%pause;
+
+% Time differences
+printf('Exercise 2.c\n');
+printf('2D sigma took:\n %d s for sigma = 1\n %d s for sigma = 3\n', I_G2D_sigma1_time, I_G2D_sigma3_time);
+printf('2 times 1D sigma took:\n %d s for sigma = 1\n %d s for sigma = 3\n', I_G1D_sigma1_time, I_G1D_sigma3_time);
