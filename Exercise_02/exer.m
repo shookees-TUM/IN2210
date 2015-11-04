@@ -1,7 +1,7 @@
 % Exercise 1
 I = imread('lena.gif');
 filter_size = [5, 5];
-J = medianFilter(I, filter_size, 'multiply');
+J = medianFilter(I, filter_size, 'mirror');
 figure('Name', 'Exercise 1.a');
 colormap(gray(256)); 
 % Original image
@@ -17,7 +17,7 @@ daspect([1 1]);
 
 % noise takes on 10% of image (or in range [0..1] it's 0.1)
 noise_scale = 0.1;
-I_gaussian_noise = noise(I, 'gaussian', 0.1);
+I_gaussian_noise = noise(I, 'gaussian', 0.2);
 I_saltpepr_noise = noise(I, 'saltandpepper', 0.1);
 figure('Name', 'Exercise 1.b');
 colormap(gray(256));
