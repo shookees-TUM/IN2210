@@ -15,9 +15,7 @@ function J = gaussianNoise(I, noise_scale)
     image_size = size(I);
     % Create layer of random values normally distributed
     noise = randn(image_size);
-    % Apply gaussian 
-    noise_scale = 0.2;
-    % Formula by http://stackoverflow.com/a/19094878/552214
+    % Scale by standard deviations of image and noise layer
     J = I + noise * noise_scale * std(I(:)) / std(noise(:));
 end
 
