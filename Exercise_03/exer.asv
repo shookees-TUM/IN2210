@@ -1,0 +1,44 @@
+% Exercise 1
+I = imread('checkerboard_tunnel.png');
+sizeI = size(I);
+% part a)
+% see harrisR.m
+%
+% part b)
+%
+% part c)
+% harrisR(I, sigma_dif, sigma_int, alpha, t)
+
+Rsingle = harrisR(I, 1, 1, 0.05, 0.01);
+%size(R)
+%
+% R = multiscale_harris(I, sigma_0, sigma_int, n, k, alpha, t)
+R = multiscale_harris(I, 1, 3, n, 3, 0.05, 0.01);
+I = double(I);
+sizeR = size(R(:,:,1))
+% define RI
+RI = zeroes(sizeI(1), sizeI(2), n)
+for i = 1 : n
+    RI(:,:,i) = R(:,:,i) + I(:,:);
+end
+%
+figure('Name', 'Exercise 1.c');
+colormap(gray(256)); 
+% Original image
+subplot(2, 2, 1);
+image(Rsingle);
+title('Harris R 1D');
+daspect([1 1 1]);
+subplot(2, 2, 2);
+image(R(1));
+title('RI 1');
+daspect([1 1 1]);
+subplot(2, 2, 3);
+image(RI(2));
+title('RI 2');
+daspect([1 1 1]);
+subplot(2, 2, 4);
+image(RI(3));
+title('RI 3');
+daspect([1 1 1]);
+%pause;

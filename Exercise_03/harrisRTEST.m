@@ -1,4 +1,4 @@
-function R_max = harrisR(I, sigma_dif, sigma_int, alpha, t)
+function R = harrisRTEST(I, sigma_dif, sigma_int, n, s0, k, alpha, t)
 % input: I is the image, sigma determines kernel size and Gaussian smooting
 % input parameters: scale level n, initial scale value s0, scale step k,
 % constant factor alpha(0.04<alpha<0.06), threshold value for R: t
@@ -36,7 +36,7 @@ M12 = conv2(G_int, N12);
 M22 = conv2(G_int, N22);
 % determine R for every pixel of the input image I
 % preallocate R
-R = zeros(size_I);
+R = zeros(pad + size_I);
 for i = pad(1)+1 : pad(1)+size_I(1)
     for j = pad(2)+1 : pad(2)+size_I(2)
         M = [M11(i-pad(1), j-pad(2)), M12(i-pad(1), j-pad(2)); M12(i-pad(1), j-pad(2)), M22(i-pad(1), j-pad(2))];
@@ -53,21 +53,4 @@ end
 % implement non-maximum suppresion
 % search for maximum in 3x3 window
 window_size = 3;
-margin = floor(window_size /2 );
-R0 = zeros(size_I(1) + 2*margin, size_I(2) + 2*margin);
-size_R0 = size(R0);
-size(R0(1+margin: size_I(1)+margin, 1+margin:size_I(2)+margin));
-size_R = size(R);
-R0(1+margin: size_I(1)+margin, 1+margin:size_I(2)+margin) = R;
-R_max = zeros(size_I);
-for i = 1 + margin : size_R0(1) - 2*margin
-    for j = 1 + margin : size_R0(2) - 2*margin
-        R_temp = R0(i-margin:i+margin, j-margin:j+margin);
-        if R(i,j) == max(max(R_temp))
-            R_max(i-margin, j-margin) = R0(i,j);
-        else R_max(i-margin, j-margin) = 0;
-        end
-    end
-end
-size(R_max)
 end

@@ -1,6 +1,6 @@
 % Creates a 2 dimensional Gaussian filter
 % H is the size of the filter
-function J = gaussian2D(sigma)
+function J = gauss2D(sigma)
     % Divide mask size by 2, so that 0 is the center
     s = floor(3*sigma /2);
     for u = -s: s
