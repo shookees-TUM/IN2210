@@ -42,7 +42,7 @@ for i = pad(1)+1 : pad(1)+size_I(1)
         M = [M11(i-pad(1), j-pad(2)), M12(i-pad(1), j-pad(2)); M12(i-pad(1), j-pad(2)), M22(i-pad(1), j-pad(2))];
         R_temp = det(M) - alpha*trace(M)^2;
         % R = lambda1 * lambda2 + alpha*(lambda1 + lambda2)^2
-        % with lambda1/2 being the eigenvalues of M
+        % with lambda1, lambda2 being the eigenvalues of M
         % set threshold for R (lecture03 p.35):
         if R_temp > t
             R(i-pad(1), j-pad(2)) = R_temp;
@@ -51,13 +51,13 @@ for i = pad(1)+1 : pad(1)+size_I(1)
     end
 end
 % implement non-maximum suppresion
-% search for maximum in 3x3 window
+% search for maximum in 3x3 or 5x5 window
 window_size = 3;
 margin = floor(window_size /2 );
 R0 = zeros(size_I(1) + 2*margin, size_I(2) + 2*margin);
 size_R0 = size(R0);
-size(R0(1+margin: size_I(1)+margin, 1+margin:size_I(2)+margin));
-size_R = size(R);
+%is_size_R = size(R0(1+margin: size_I(1)+margin, 1+margin:size_I(2)+margin));
+%size_R = size(R);
 R0(1+margin: size_I(1)+margin, 1+margin:size_I(2)+margin) = R;
 R_max = zeros(size_I);
 for i = 1 + margin : size_R0(1) - 2*margin
@@ -69,5 +69,5 @@ for i = 1 + margin : size_R0(1) - 2*margin
         end
     end
 end
-size(R_max)
+%sizeR_max = size(R_max);
 end

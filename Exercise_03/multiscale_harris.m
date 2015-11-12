@@ -13,17 +13,17 @@ for i = 1:n
         sigma_0_temp = 2^((j-2)/k) * sigma_0;
         %sigma_0_temp = sigma_0 + sigma_0 * j / k; 
         % harrisR(I, sigma_dif, sigma_int, alpha, t)
-        sizeR_n = size(R_n);
+        %sizeR_n = size(R_n);
         R_n(:,:,j+1) = harrisR(J, sigma_0_temp, sigma_int, alpha, t);
     end
-    % corner search
+    % corner search across scales
     for l = 2 : k
         R_3stack = R_n(:, :, l-1 : l+1);
         % find max index in vertical direction (stack direction)
         % image lies horizontally
         [M, N] = max(R_3stack, [], 3);
         sizeM = size(M);
-        sizeN = size(N);
+        %sizeN = size(N);
         for layer = 1 : k
             for x = 1 : sizeM(1)
                 for y = 1 : sizeM(2)
