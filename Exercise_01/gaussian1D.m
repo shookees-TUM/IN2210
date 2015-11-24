@@ -8,5 +8,5 @@ function J = gaussian1D(mask_size, sigma)
         % prefactor 1 / sqrt(2 * pi * sigma^2) *
         % not necessary because of normalization
     end
-J = 1 / sum(J) * J;
+    J = 1 / sum(J) * J;
 end

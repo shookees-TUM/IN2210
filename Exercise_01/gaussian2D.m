@@ -8,5 +8,5 @@ function J = gaussian2D(mask_size, sigma)
             J(u + s + 1, v + s +1) = 1 / (2 * pi * sigma^2) * exp(-1 / 2 * (u^2 + v^2) / (sigma^2));
         end
     end
-J = J ./ sum(J(:));
+    J = J ./ sum(J(:));
 end

@@ -9,7 +9,7 @@ function J = convoluteImage(H, I, border)
             J(:, :, i) = convolution(H, I(:, :, i), border);
         end
     else
-        %grayscale have 2 dimensions
+        %grayscales have 2 dimensions
         J = convolution(H, I, border);
     end
 end

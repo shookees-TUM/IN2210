@@ -12,7 +12,7 @@ function J = convolution(H, I, border)
     padded_image = zeros(image_size + pad * 2);
     % Copy image, with appropriate padding
     padded_image(1 + pad(1): end - pad(1), 1 + pad(2): end - pad(2)) = I;
-    % Handle border problem
+    % Handle border problem - currently takes most loading time
     if strcmp(border, 'mirror') == 1
         %left border
         padded_image(1 + pad(1): end - pad(1), 1 : pad(2)) = fliplr(padded_image(1 + pad(1): end - pad(1), 1 + pad(2): 2 * pad(2)));
