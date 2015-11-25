@@ -11,4 +11,5 @@ img.filename = '2007_000032.jpg';
 img.filepath = fullfile(data_folder, img.filename);
 img.original = imread(img.filepath);
 
-img.integral = integralImage(img.original);
+% Function name due to resemblance to matlab's inbuilt one. Also, the output differs by 0s top and left margin
+img.integral = integralImage2(img.original);
