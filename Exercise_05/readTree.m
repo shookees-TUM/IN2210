@@ -1,4 +1,4 @@
-% Reads text files into trees
+% Reads text file into tree
 % The first line of the file shows how many nodes there are - n
 % next n lines have the following format:
 % i c_L c_R t x_0 y_0 z_0 x_1 y_1 z_1 s
