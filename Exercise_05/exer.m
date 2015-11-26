@@ -1,3 +1,4 @@
+tic;
 %%% Exercise 1 - loading the forest
 data_folder = 'data/';
 data_file_template = 'Tree{0}.txt';
@@ -23,3 +24,4 @@ img.heatmapcombo(:, :, 1) = double(img.heatmapcombo(:, :, 1)) + img.heatmap;
 img.heatmapcombo(:, :, 2) = double(img.heatmapcombo(:, :, 2)) + img.heatmap;
 img.heatmapcombo(:, :, 3) = double(img.heatmapcombo(:, :, 3)) + img.heatmap;
 image(img.heatmapcombo);
+toc
