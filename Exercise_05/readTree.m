@@ -45,7 +45,6 @@ function tree = readTreeFromFile(filepath)
     % read nodes
     for i = 1: n
         tmp = strread(fgets(fid));
-        node.id = tmp(1);
         node.cl = tmp(2);
         node.cr = tmp(3);
         node.t = tmp(4);
@@ -56,15 +55,14 @@ function tree = readTreeFromFile(filepath)
         node.y(2) = tmp(9);
         node.z(2) = tmp(10);
         node.s = tmp(11);
-        tree.nodes(i) = node;
+        tree.nodes(tmp(1) + 1) = node;
     end
     % read leaves
     m = str2num(fgets(fid));
     for i = 1: m
         tmp = strread(fgets(fid));
-        leaf.id = tmp(1);
         leaf.px = tmp(2);
         leaf.py = tmp(3);
-        tree.leaves(i) = leaf;
+        tree.leaves(tmp(1) + 1) = leaf;
     end
 end
