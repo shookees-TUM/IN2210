@@ -49,6 +49,6 @@ function J = addpadding(I, size_kernel, border)
         %bottom left diagonal space
         padded_image(end - pad(1) + 1: end, 1: pad(2)) = padded_image(end - pad(1), 1 + pad(2)) * ones(pad);
     end %if none is chosen, simply leave as it is
-padded_image = cast(padded_image, class(I));
-J = padded_image;
+    padded_image = cast(padded_image, class(I));
+    J = padded_image;
 end

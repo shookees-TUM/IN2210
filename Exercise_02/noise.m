@@ -16,7 +16,7 @@ function J = gaussianNoise(I, noise_scale)
     % Create layer of random values normally distributed
     noise = randn(image_size);
     % Scale by standard deviations of image and noise layer
-    J = I + noise * noise_scale * std(I(:)) / std(noise(:));
+    J = single(I) + noise * noise_scale * std2(I) / std2(noise);
 end
 
 % Creates Saltn and Pepper noise on image I
