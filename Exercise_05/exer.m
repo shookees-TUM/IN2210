@@ -13,3 +13,13 @@ img.original = imread(img.filepath);
 
 % Function name due to resemblance to matlab's inbuilt one. Also, the output differs by 0s top and left margin
 img.integral = integralImage2(img.original);
+
+%%% Exercise 3 - Testing
+% Should it get the prediction where the center of the image is?
+img.heatmap = predictionVotes(trees, img.integral);
+img.heatmapcombo = img.original;
+% apply heatmap for every color channel
+img.heatmapcombo(:, :, 1) = double(img.heatmapcombo(:, :, 1)) + img.heatmap;
+img.heatmapcombo(:, :, 2) = double(img.heatmapcombo(:, :, 2)) + img.heatmap;
+img.heatmapcombo(:, :, 3) = double(img.heatmapcombo(:, :, 3)) + img.heatmap;
+image(img.heatmapcombo);
