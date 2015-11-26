@@ -1,3 +1,4 @@
+% Does a feature test on integral image with specific x and y values on specific node
 % returns true if < t; false if >= t
 function result = featureTest(x, y, node, img)
     %    evaluateBox(x, y, xn, yn, zn, s, img)
