@@ -5,6 +5,7 @@ function prediction = treePrediction(x, y, tree, img)
     while (~leaf_reached)
         % if true, take left child; else - right
         if (featureTest(x, y, tree.nodes(current_node_id + 1), img))
+
             current_node_id = tree.nodes(current_node_id + 1).cl;
         else
             current_node_id = tree.nodes(current_node_id + 1).cr;

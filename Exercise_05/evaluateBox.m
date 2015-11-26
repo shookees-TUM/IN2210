@@ -1,10 +1,12 @@
 function evaluation = evaluateBox(x, y, xn, yn, zn, s, img)
     img_size = size(img);
     % e.g.: x + xn + s is "x plus s" -> xps
+    % Precalculate values as there are only 4 varying operations
     xps = x + xn + s;
     xms = x + xn - s;
     yps = y + yn + s;
     yms = y + yn - s;
+
     switch zn
         case 0
             zn = 3;
@@ -14,10 +16,10 @@ function evaluation = evaluateBox(x, y, xn, yn, zn, s, img)
         case 3
             zn = 1;
     end
+    % Deduce each part of formula
     if (xps <= 0 || xps > img_size(2) || yms <= 0 || yms > img_size(1))
         e1 = 0;
     else
-
         e1 = img(yms, xps, zn);
     end
 
@@ -39,5 +41,6 @@ function evaluation = evaluateBox(x, y, xn, yn, zn, s, img)
         e4 = img(yms, xms, zn);
     end
 
+    % Formula for evaluation
     evaluation = e1 - e2 - e3 + e4;
 end

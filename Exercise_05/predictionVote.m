@@ -4,9 +4,9 @@
 % returns - a vote, which is x and y coordinate
 function predictions = predictionVote(tree, img)
     img_size = size(img);
-    for x = 1: img_size(2)
-        for y = 1: img_size(1)
-            predictions(x, y) = treePrediction(x, y, tree, img);
+    for y = 1: img_size(1)
+        for x = 1: img_size(2)
+            predictions(y, x) = treePrediction(x, y, tree, img);
         end
     end
 end
