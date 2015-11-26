@@ -24,11 +24,12 @@ function heatmap = predictionVotes(trees, img)
     % We have the heatmap
     max_heatmap_val = max(max(heatmap));
     % cut off, to reduce less accurate results
-    cutoff = max_heatmap_val * 0.8; % Hand-picked constant
+    cutoff = max_heatmap_val * 0.8 % Hand-picked constant
     for y = 1: img_size(1)
         for x = 1: img_size(2)
             if (heatmap(y, x) < cutoff)
                 heatmap(y, x) = 0;
+            end
         end
     end
     % Scale it to grayscale max value (255)
