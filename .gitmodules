@@ -1,0 +1,3 @@
+[submodule "Exercise_04/vlfeat"]
+	path = Exercise_04/vlfeat
+	url = https://github.com/vlfeat/vlfeat
